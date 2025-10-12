@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace MyProject
 {
@@ -9,11 +9,12 @@ namespace MyProject
             Console.WriteLine("Введите температуру в градусах Цельсия");
             string input = Console.ReadLine();
             int temperatureC;
+            
             bool isSuccess = int.TryParse(input, out temperatureC);
             if (isSuccess)
             {
                 double temperatureF = temperatureC * 1.8 + 32;
-                Console.WriteLine($"Это {temperatureF} градусов Фаренгейта");
+                Console.WriteLine($"{temperatureC}°C = {temperatureF}°F");
             }
             else
             {

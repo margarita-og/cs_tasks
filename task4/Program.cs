@@ -7,19 +7,20 @@ namespace MyProject
         static void Main(string[] args)
         {
             Console.WriteLine("Придумайте пароль");
-            string password = Console.ReadLine();
+            string password;
             bool isCorrect = false;
-            while (isCorrect == false)
+            while (!isCorrect)
             {
+                password = Console.ReadLine();
                 bool containsDigit = false;
                 bool containsUpper = false;
                 bool containsSpecial = false;
+
                 if (password.Length < 8)
                 {
                     Console.WriteLine("Длина должна быть не менее 8 символов, придумайте другой");
-                    password = Console.ReadLine();
-                    continue;
                 }
+
                 foreach (char symbol in password)
                 {
                     if ("0123456789".Contains(symbol))
@@ -35,26 +36,22 @@ namespace MyProject
                         containsSpecial = true;
                     }
                 }
-                if (containsDigit == false)
+
+                if (!containsDigit)
                 {
                     Console.WriteLine("Пароль должен содержать хотя бы одну цифру, придумайте другой");
-                    password = Console.ReadLine();
-                    continue;
                 }
-                if (containsSpecial == false)
+                if (!containsSpecial)
                 {
                     Console.WriteLine("Пароль должен содержать хотя бы один специальный символ (!@#$%^&*), придумайте другой");
-                    password = Console.ReadLine();
-                    continue;
                 }
-                if (containsUpper == false)
+                if (!containsUpper)
                 {
                     Console.WriteLine("Пароль должен содержать хотя бы одну заглавную букву, придумайте другой");
-                    password = Console.ReadLine();
-                    continue;
                 }
-                isCorrect = true;
+                isCorrect = containsDigit && containsSpecial && containsUpper;
             }
+            
             Console.WriteLine("Такой пароль подходит!");
         }
     }

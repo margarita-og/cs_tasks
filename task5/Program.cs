@@ -8,29 +8,49 @@ namespace MyProject
         {
             Console.WriteLine("Введите текст");
             string text = Console.ReadLine();
+
+            if (text.Length == 0)
+            {
+                Console.WriteLine("Вы ничего не ввели");
+                return;
+            }
+            
             string[] words = text.Split(' ');
             char point = '.';
+            char exclamationMark = '!';
+            char questionMark = '?';
+            string punctuation = ".,!?:;()%'\"/";
+            int totalLen = 0;
+            Dictionary<string, int> wordsCounter = new Dictionary<string, int>();
+
             Console.WriteLine($"Количество слов: {words.Length}");
-            Console.WriteLine($"Количество предложений: {text.Count(c => c == point)}");
+            Console.WriteLine($"Количество предложений: {text.Count(c => c == point) + text.Count(c => c == exclamationMark) + text.Count(c => c == questionMark)}");
+
             for (int i = 0; i < words.Length; i++)
             {
-                if (words[i].EndsWith(".") || words[i].EndsWith(","))
+                foreach (char mark in punctuation)
                 {
-                    words[i] = words[i].Substring(0, words[i].Length - 1);
+                    if (words[i].EndsWith(mark) || words[i].EndsWith(mark))
+                    {
+                        words[i] = words[i].Substring(0, words[i].Length - 1);
+                    }
+                    if (words[i].StartsWith(mark) || words[i].StartsWith(mark))
+                    {
+                        words[i] = words[i].Substring(1, words[i].Length - 1);
+                    }
                 }
-            }
-            string maxWord = "";
-            int maxWordCount = 0;
-            int totalLen = 0;
-            foreach (string word in words)
-            {
-                totalLen += word.Length;
-                if (words.Count(c => c == word) > maxWordCount)
+                if (!wordsCounter.ContainsKey(words[i]))
                 {
-                    maxWord = word;
-                    maxWordCount = words.Count(c => c == word);
+                    wordsCounter.Add(words[i], 1);
                 }
+                else
+                {
+                    wordsCounter[words[i]]++;
+                }
+                totalLen += words[i].Length;
             }
+            
+            var maxWord = wordsCounter.OrderByDescending(x => x.Value).First().Key;
             Console.WriteLine($"Самое частое слово: {maxWord}");
             Console.WriteLine($"Средняя длина слова: {totalLen / words.Length}");
         }
