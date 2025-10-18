@@ -10,18 +10,16 @@ namespace MyProject
             Random random = new Random();
             int secretNumber = random.Next(1, 11);
 
-            bool guessed = false;
             string input = Console.ReadLine();
             int number;
 
-            while (!guessed)
+            while (true)
             {
                 bool isSuccess = int.TryParse(input, out number);
                 if (isSuccess)
                 {
                     if (number == secretNumber)
                     {
-                        guessed = true;
                         Console.WriteLine("Вы угадали!");
                         break;
                     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 namespace MyProject
 {
 
@@ -30,11 +32,11 @@ namespace MyProject
             {
                 foreach (char mark in punctuation)
                 {
-                    if (words[i].EndsWith(mark) || words[i].EndsWith(mark))
+                    if (words[i].EndsWith(mark))
                     {
                         words[i] = words[i].Substring(0, words[i].Length - 1);
                     }
-                    if (words[i].StartsWith(mark) || words[i].StartsWith(mark))
+                    if (words[i].StartsWith(mark))
                     {
                         words[i] = words[i].Substring(1, words[i].Length - 1);
                     }

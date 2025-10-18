@@ -49,7 +49,7 @@ namespace MyProject
                 {
                     Console.WriteLine("Пароль должен содержать хотя бы одну заглавную букву, придумайте другой");
                 }
-                isCorrect = containsDigit && containsSpecial && containsUpper;
+                isCorrect = containsDigit && containsSpecial && containsUpper && (password.Length >= 8);
             }
             
             Console.WriteLine("Такой пароль подходит!");
